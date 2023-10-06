@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 # Load the car price dataset and cache it
 @st.cache_data(show_spinner=True)
 def load_data():
-    ds = pd.read_csv("car_dataset_.csv", encoding="utf-8")
+    ds = pd.read_csv("dataset.csv", encoding="utf-8")
     ds["Price"] = ds["Price"].astype(float)
     return ds
 
