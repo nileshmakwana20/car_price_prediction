@@ -18,7 +18,7 @@ data = load_data()
 # Split the dataset into training and test sets and cache it
 @st.cache_data(show_spinner=True)
 def preprocess_data(ds):
-    X = pd.get_dummies(ds[["Model_Name", "Year", "Fuel_Type", "Engine_Size"]], columns=["Model_Name", "Fuel_Type"],)
+    X = pd.get_dummies(ds[["Model", "Year", "Fuel_Type", "Engine_Size"]], columns=["Model", "Fuel_Type"],)
     y = ds["Price"]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
     return X_train, X_test, y_train, y_test
@@ -42,7 +42,7 @@ st.title("Car Price Prediction App")
 
 # Add a sidebar to select the car features
 sidebar = st.sidebar
-car_model = sidebar.selectbox("Car Model", data["Model_Name"].unique())
+car_model = sidebar.selectbox("Car Model", data["Model"].unique())
 year = sidebar.slider("Year", 2011, 2025)
 fuel_type = sidebar.selectbox("Fuel Type", data["Fuel_Type"].unique())
 engine_size = sidebar.number_input("Engine Capacity", 1, 6, step=1, value=1, format="%d")
